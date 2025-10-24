@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../conexion.php';
+require_once(__DIR__ . '/../../conexion.php');
 
 $usuario = $_POST['usuario'] ?? '';
 $contrasena = $_POST['contrasena'] ?? '';
@@ -16,7 +16,7 @@ if ($row = $result->fetch_assoc()) {
         $_SESSION['id_usuario'] = $row['id_usuario'];
         $_SESSION['usuario'] = $row['usuario'];
         $_SESSION['rol'] = $row['rol'];
-        header("Location: dashboard.php");
+        header("Location: ../dashboard.php");
         exit;
     } else {
         $_SESSION['error'] = "Contraseña incorrecta.";

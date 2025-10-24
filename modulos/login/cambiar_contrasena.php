@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../conexion.php';
+require_once(__DIR__ . '/../../conexion.php');
 if (!isset($_SESSION['usuario'])) {
     header('Location: index.php');
     exit;

@@ -1,9 +1,10 @@
 <?php
 session_start();
 if ($_SESSION['rol'] != 'administrador') { header("Location: dashboard.php"); exit(); }
-require_once __DIR__ . '/../conexion.php';
+require_once(__DIR__ . '/../../conexion.php');
 $result = $conn->query("SELECT * FROM usuarios");
 ?>
+<?php include __DIR__ . '/../../inc/header.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,12 +13,12 @@ $result = $conn->query("SELECT * FROM usuarios");
 <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-<div class="page">
-  <div class="header-panel">
-    <h2>Gestión de Usuarios</h2>
+<div class="card-table">
+    <h3>Gestión de Usuarios</h3>
+    <small class="text-muted">Usuario: <?= htmlspecialchars($usuario_nombre) ?> · Rol: <?= htmlspecialchars($rol) ?></small>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
     <a href="usuarios_agregar.php" class="btn-new">+ Nuevo Usuario</a>
   </div>
-  <div class="card-table">
     <table class="table">
       <thead>
         <tr><th>ID</th><th>Nombre</th><th>Usuario</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
@@ -38,7 +39,6 @@ $result = $conn->query("SELECT * FROM usuarios");
         <?php endwhile; ?>
       </tbody>
     </table>
-  </div>
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../conexion.php';
+require_once(__DIR__ . '/../../conexion.php');
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'administrador') { die("Acceso denegado."); }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -34,13 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<?php include __DIR__ . '/../../inc/header.php'; ?>
 <!doctype html>
 <html lang="es">
 <head><meta charset="utf-8"><title>Agregar Usuario</title></head>
 <body>
 <h2>Nuevo Usuario</h2>
 <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?>
-<form method="post">
+<form method="post" style="display:grid;gap:10px;max-width:720px;">
   <label>Nombre completo</label><br><input name="nombre" required><br>
   <label>Usuario</label><br><input name="usuario" required><br>
   <label>Correo</label><br><input name="correo" type="email"><br>

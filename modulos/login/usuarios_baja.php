@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['rol'] != 'administrador') { header("Location: dashboard.php"); exit(); }
-require_once __DIR__ . '/../conexion.php';
+require_once(__DIR__ . '/../../conexion.php');
 
 $id = $_GET['id'];
 $u = $conn->query("SELECT estado FROM usuarios WHERE id_usuario=$id")->fetch_assoc();
