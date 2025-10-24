@@ -44,8 +44,8 @@ $inventarios = $conn->query("SELECT id_inventario, lote, clasificacion FROM inve
     <label>Cantidad</label><input type="number" name="cantidad" value="<?= $reg['cantidad_recolectada'] ?>" min="0" required>
     <label>Observaciones</label><textarea name="observaciones"><?= htmlspecialchars($reg['observaciones']) ?></textarea>
     <div style="text-align:right;">
-      <button class="btn btn-primary" type="submit">Cancelar</button>
-      <a class="btn-outline" href="produccion_listar.php">Actualizar</a>
+      <button class="btn btn-primary" type="submit">Actualizar</button>
+      <a class="btn-outline" href="produccion_listar.php">Cancelar</a>
     </div>
   </form>
 </div>

@@ -46,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <option value="Vencido">Vencido</option>
     </select>
     <div style="text-align:right;">
-      <button class="btn btn-primary" type="submit">Cancelar</button>
-      <a class="btn-outline" href="inventario_listar.php">Guardar</a>
+      <button class="btn btn-primary" type="submit">Guardar</button>
+      <a class="btn-outline" href="inventario_listar.php">Cancelar</a>
     </div>
   </form>
 </div>

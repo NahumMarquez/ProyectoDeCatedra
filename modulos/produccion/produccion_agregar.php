@@ -49,8 +49,8 @@ $inventarios = $conn->query("SELECT id_inventario, lote, clasificacion FROM inve
     <label>Cantidad recolectada</label><input type="number" name="cantidad" min="0" required>
     <label>Observaciones</label><textarea name="observaciones"></textarea>
     <div style="text-align:right;">
-      <button class="btn btn-primary" type="submit">Cancelar</button>
-      <a class="btn-outline" href="produccion_listar.php">Guardar</a>
+      <button class="btn btn-primary" type="submit">Guardar</button>
+      <a class="btn-outline" href="produccion_listar.php">Cancelar</a>
     </div>
   </form>
 </div>

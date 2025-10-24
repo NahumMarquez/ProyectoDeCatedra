@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <option value="Vencido" <?= $reg['estado']=='Vencido'?'selected':'' ?>>Vencido</option>
     </select>
     <div style="text-align:right;">
-      <button class="btn btn-primary" type="submit">Cancelar</button>
-      <a class="btn-outline" href="inventario_listar.php">Actualizar</a>
+      <button class="btn btn-primary" type="submit">Actualizar</button>
+      <a class="btn-outline" href="inventario_listar.php">Cancelar</a>
     </div>
   </form>
 </div>
