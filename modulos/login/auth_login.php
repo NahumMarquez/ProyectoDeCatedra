@@ -25,5 +25,5 @@ if ($row = $result->fetch_assoc()) {
     $_SESSION['error'] = "Usuario no encontrado o inactivo.";
 }
 header("Location: index.php");
-header("Location: crear_producto.php");
+exit;
 ?>

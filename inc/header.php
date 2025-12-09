@@ -37,6 +37,9 @@ $rol = $_SESSION['rol'] ?? '';
   <a href="/modulos/produccion/produccion_listar.php"
      class="tab <?= (strpos($_SERVER['PHP_SELF'], 'produccion') !== false) ? 'active' : '' ?>">
      Producción</a>
+  <a href="/modulos/ventas/ventas_listar.php"
+     class="tab <?= (strpos($_SERVER['PHP_SELF'], 'ventas') !== false || strpos($_SERVER['PHP_SELF'], 'clientes') !== false) ? 'active' : '' ?>">
+     Ventas</a>
   <?php if ($rol === 'administrador'): ?>
     <a href="/modulos/login/usuarios_listar.php"
        class="tab <?= (strpos($_SERVER['PHP_SELF'], 'usuarios') !== false) ? 'active' : '' ?>">
