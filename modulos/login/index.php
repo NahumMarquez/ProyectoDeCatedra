@@ -16,15 +16,19 @@
       <div class="alert error"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
     <?php endif; ?>
 
+    <!-- FORMULARIO CORREGIDO -->
     <form action="auth_login.php" method="POST">
+
       <div class="form-group">
         <label>Usuario</label>
         <input type="text" name="usuario" required>
       </div>
+
       <div class="form-group">
         <label>Contraseña</label>
         <input type="password" name="contrasena" required>
       </div>
+
       <button class="btn btn-primary" type="submit">Entrar</button>
     </form>
   </div>

@@ -3,6 +3,9 @@ session_start();
 require_once __DIR__ . '/../../conexion.php';
 if (!isset($_SESSION['usuario'])) { header('Location: ../../index.php'); exit; }
 
+$usuario_nombre = $_SESSION['usuario'];
+$rol = $_SESSION['rol'];
+
 // Filtros
 $filtro_cliente = $_GET['cliente'] ?? '';
 $filtro_fecha_desde = $_GET['fecha_desde'] ?? '';
@@ -14,12 +17,15 @@ $sql = "SELECT v.*, c.nombre AS cliente, u.nombre AS vendedor
         INNER JOIN usuarios u ON v.id_usuario = u.id_usuario
         WHERE 1=1";
 
+// ✔ Búsqueda insensible a mayúsculas/minúsculas
 if ($filtro_cliente) {
-    $sql .= " AND c.nombre LIKE '%" . $conn->real_escape_string($filtro_cliente) . "%'";
+    $sql .= " AND c.nombre LIKE '%" . $conn->real_escape_string($filtro_cliente) . "%' COLLATE utf8mb4_general_ci";
 }
+
 if ($filtro_fecha_desde) {
     $sql .= " AND v.fecha_venta >= '" . $conn->real_escape_string($filtro_fecha_desde) . "'";
 }
+
 if ($filtro_fecha_hasta) {
     $sql .= " AND v.fecha_venta <= '" . $conn->real_escape_string($filtro_fecha_hasta) . "'";
 }
@@ -28,6 +34,7 @@ $sql .= " ORDER BY v.fecha_venta DESC, v.id_venta DESC";
 $res = $conn->query($sql);
 ?>
 <?php include __DIR__ . '/../../inc/header.php'; ?>
+
 <div class="card-table">
   <h3>Gestión de Ventas</h3>
   <small class="text-muted">Usuario: <?= htmlspecialchars($usuario_nombre) ?> · Rol: <?= htmlspecialchars($rol) ?></small>
@@ -92,4 +99,5 @@ $res = $conn->query($sql);
     </tbody>
   </table>
 </div>
+
 <?php include __DIR__ . '/../../inc/footer.php'; ?>

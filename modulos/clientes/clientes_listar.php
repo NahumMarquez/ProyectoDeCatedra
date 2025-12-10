@@ -1,21 +1,49 @@
-<?php
+<?php 
 session_start();
 require_once __DIR__ . '/../../conexion.php';
 if (!isset($_SESSION['usuario'])) { header('Location: ../../index.php'); exit; }
 
-$res = $conn->query("SELECT c.*, 
-                     COUNT(v.id_venta) AS total_ventas,
-                     COALESCE(SUM(v.total), 0) AS monto_total
-                     FROM clientes c
-                     LEFT JOIN ventas v ON c.id_cliente = v.id_cliente
-                     GROUP BY c.id_cliente
-                     ORDER BY c.nombre ASC");
+// ==========================
+// BÚSQUEDA
+// ==========================
+$q = $conn->real_escape_string($_GET['q'] ?? '');
+
+$sql = "SELECT c.*, 
+        COUNT(v.id_venta) AS total_ventas,
+        COALESCE(SUM(v.total), 0) AS monto_total
+        FROM clientes c
+        LEFT JOIN ventas v ON c.id_cliente = v.id_cliente
+        WHERE 1=1";
+
+if ($q !== '') {
+    // Búsqueda insensible a mayúsculas/minúsculas
+    $sql .= " AND c.nombre LIKE '%$q%' COLLATE utf8mb4_general_ci";
+}
+
+$sql .= " GROUP BY c.id_cliente
+          ORDER BY c.nombre ASC";
+
+$res = $conn->query($sql);
 ?>
 <?php include __DIR__ . '/../../inc/header.php'; ?>
+
 <div class="card-table">
   <h3>Gestión de Clientes</h3>
   <small class="text-muted">Usuario: <?= htmlspecialchars($usuario_nombre) ?> · Rol: <?= htmlspecialchars($rol) ?></small>
-  
+
+  <!-- FORMULARIO DE BÚSQUEDA -->
+  <form method="get" style="margin:20px 0; display:flex; gap:10px;">
+      <input 
+        type="text" 
+        name="q" 
+        placeholder="Buscar cliente..." 
+        value="<?= htmlspecialchars($q) ?>" 
+        style="flex:1;"
+      >
+      <button class="btn-outline" type="submit">🔍 Buscar</button>
+      <a href="clientes_listar.php" class="btn-outline">✖ Limpiar</a>
+  </form>
+
   <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
     <a class="btn-outline" href="../ventas/ventas_listar.php">← Volver a Ventas</a>
     <a class="btn-new" href="clientes_agregar.php">+ Nuevo Cliente</a>
@@ -55,4 +83,5 @@ $res = $conn->query("SELECT c.*,
     </tbody>
   </table>
 </div>
+
 <?php include __DIR__ . '/../../inc/footer.php'; ?>

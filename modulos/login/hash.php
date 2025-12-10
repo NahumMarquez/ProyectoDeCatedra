@@ -1,4 +1,4 @@
 <?php
-echo password_hash("12345678", PASSWORD_DEFAULT);
+echo password_hash("123456", PASSWORD_DEFAULT);
 ?>
     
